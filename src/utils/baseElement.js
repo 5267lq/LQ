@@ -4,8 +4,6 @@ import { GUI } from "three/examples/jsm/libs/lil-gui.module.min.js";
 // 场景加载
 export const initBaseScene = (_this) => {
   _this.scene = new THREE.Scene();
-  const helper = new THREE.AxesHelper(1);
-  _this.scene.add(helper);
   // this.scene.fog = new THREE.Fog(0xeeeeee, 0, 500);
 };
 // 渲染器加载
@@ -28,9 +26,22 @@ export const initBaseRenderer = (_this) => {
 export const initBaseControls = (_this) => {
   //   controls
   _this.controls = new OrbitControls(_this.camera, _this.renderer.domElement);
+  // 远近幅度控制
+  _this.controls.minDistance = 2
+  _this.controls.maxDistance = 5.5
+  // 鼠标左右旋转幅度
+  _this.controls.minAzimuthAngle = -Math.PI / 4
+  _this.controls.maxAzimuthAngle = Math.PI / 4
+  // 鼠标上下转动幅度
+  _this.controls.minPolarAngle = Math.PI / 4
+  // _this.controls.minPolarAngle = Math.PI / 2
+  _this.controls.maxPolarAngle = Math.PI / 2
+  // _this.controls.maxPolarAngle = Math.PI / 4
+  // 开启阻尼（惯性）
   _this.controls.enableDamping = true;
+  _this.controls.dampingFactor = 0.04
+  // 禁止平移
   _this.controls.enablePan = false;
-  console.log('=====controls');
 };
 // 加载摄像机
 export const initBaseCamera = (_this) => {
@@ -38,16 +49,9 @@ export const initBaseCamera = (_this) => {
     75,
     window.innerWidth / window.innerHeight,
     0.1,
-    10000
+    1000
   );
   // const cameraPerspectiveHelper = new THREE.CameraHelper(_this.camera);
   // _this.scene.add(cameraPerspectiveHelper);
-  _this.camera.position.set(0, 0, 5);
-};
-// 加载GUI
-export const initGui = (_this) => {
-  _this.gui = new GUI();
-  _this.gui.domElement.classList.add();
-  _this.gui.domElement.style.cssText = "position:absolute;top:0;right:0px;";
-  _this.gui.add(_this.effectController, "A").name("Selected:").listen();
+  _this.camera.position.set(0, 0, 2.5);
 };

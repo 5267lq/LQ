@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { EXRLoader } from "three/examples/jsm/loaders/EXRLoader";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 export const initLight = (_this) => {
+  // const LightFolder = _this.gui.addFolder('Light')
   // if (_this.isShowLight) {
   // 点光源(灯泡)
   const PointLight = new THREE.PointLight(0xffffff, 0);

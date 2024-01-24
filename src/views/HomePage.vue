@@ -13,11 +13,11 @@
     <div>
       <el-card style="width: 300px" class="label">
         <div v-for="(info, index) in dataInfo" :key="index">
-          <div class="span">{{ info.key }}</div>
-          <div class="span" style="display: inline-block; margin-left: 50px">
+          <div class="title">{{ info.key }}</div>
+          <el-divider />
+          <div class="content">
             {{ info.value }}
           </div>
-          <el-divider />
         </div>
       </el-card>
     </div>
@@ -39,7 +39,6 @@ import { initLight, initRGB, initEXR } from "@/utils/enviromentInit";
 import { clickPick } from "../../public/static/js/clickPick";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Stats from "../../public/static/js/stats";
-import Swal from "sweetalert2";
 
 export default {
   components: {
@@ -85,7 +84,7 @@ export default {
       this.initStats();
       this.initBall();
       //   gui
-      // this.initGui();
+      this.initGui();
       //   click
     },
     initModel() {
@@ -111,25 +110,31 @@ export default {
     initStats() {
       this.stats = new Stats();
       this.stats.domElement.style.position = "absolute";
-      this.stats.domElement.style.left = "256px";
+      this.stats.domElement.style.left = "0px";
       this.stats.domElement.style.top = "0px";
       document.body.appendChild(this.stats.domElement);
       return this.stats;
     },
     // 初始化控制板
     initGui(status) {
-      this.gui = new GUI();
+      this.gui = new GUI({ width: 360 });
       this.gui.domElement.classList.add();
-      this.gui.domElement.style.cssText = "position:absolute;top:0;right:0px;";
+      // this.gui.domElement.style.cssText = "position:absolute;top:0;right:0px;";
       const options = {
         Helper: false,
         Fog: false,
         Verctor: false,
+        "show model": true,
       };
-      this.gui.add(this.effectController, "A").name("Selected:").listen();
-      this.gui.add(options, "Helper").onChange((val) => {
+
+      const ModelFolder = this.gui.addFolder("Visibility");
+      ModelFolder.add(options, "show model").onChange(this.showModel);
+
+      const HelperFolder = this.gui.addFolder("Helper");
+      // this.gui.add(this.effectController, "A").name("Selected:").listen();
+      HelperFolder.add(options, "Helper").onChange((val) => {
         if (val) {
-          this.axes = new THREE.AxesHelper(5000);
+          this.axes = new THREE.AxesHelper(1);
           this.scene.add(this.axes);
           this.helper = new THREE.GridHelper(10000, 2, 0xffffff, 0xffffff);
           this.scene.add(this.helper);
@@ -139,11 +144,16 @@ export default {
         }
       });
     },
+
     showMainpage(isDone) {
       if (isDone) {
         document.getElementById("loading").style.display = "none";
         this.mapShow = true;
       }
+    },
+
+    showModel(visibility) {
+      this.face.visible = visibility;
     },
 
     animate() {
@@ -156,6 +166,7 @@ export default {
       // console.log("=====render draw call", this.renderer.info.render);
     },
   },
+
   beforeDestroy() {
     this.scene.clear();
     this.stats = null;
@@ -290,6 +301,12 @@ export default {
   border-radius: 50%;
   animation: animateC 2s linear infinite;
 }
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
 
 span {
   display: block;
@@ -405,8 +422,8 @@ span:before {
   background: rgba(0, 0, 0, 0.6);
   color: #ffffff;
 }
-.label .span {
+.label .content {
   display: inline-block;
-  width: 100px;
+  font-size: 12px;
 }
 </style>

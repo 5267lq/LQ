@@ -62,7 +62,7 @@ export const clickPick = (_this) => {
           // _this.trucklist.forEach((e) => {
           //   if (e.name === object_name) {
           _this.dataInfo = [
-            { key: "name", value: "左眼" },
+            { key: "眼整形手术", value: "常见的四种双眼皮形态 开扇形：经典的双眼皮，特点是内窄外宽，双眼皮褶皱线的起点是从内眼角里面发出来，内眼角轻度包裹。 平扇形：是大多数求美者比较喜欢的形状，特点是内窄外宽，和开扇的区别在于双眼皮的褶皱线不是从内眼角里出来而是上面。 新月形：甜美型双眼皮，特点是两头窄、中间宽，因形似弯月而得名，这种眼睛比较显甜美、可爱和幼态。 欧式大平行：适合眉骨高立体脸型，它的眼头和眼尾宽度基本上是持平的，内眼角的赘皮几乎没有，眼间距很近者不适合。" },
           ];
           // }
           // });
@@ -72,7 +72,7 @@ export const clickPick = (_this) => {
           // _this.trucklist.forEach((e) => {
           //   if (e.name === object_name) {
           _this.dataInfo = [
-            { key: "name", value: "右眼" },
+            { key: "眼整形手术", value: "右眼" },
           ];
           // }
           // });

@@ -1,4 +1,4 @@
-# metaverse_demo01
+# Cosmetology
 
 ## Project setup
 ```
