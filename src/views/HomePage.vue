@@ -36,9 +36,9 @@ import {
 import { initFace } from "@/utils/modelList";
 import MenuSide from "@/components/menuSide.vue";
 import { initLight, initRGB, initEXR } from "@/utils/enviromentInit";
-import { clickPick } from "../../public/static/js/clickPick";
+import { clickPick } from "../utils/clickPick";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import Stats from "../../public/static/js/stats";
+import Stats from "../utils/stats";
 
 export default {
   components: {
@@ -427,3 +427,4 @@ span:before {
   font-size: 12px;
 }
 </style>
+../utils/stats
